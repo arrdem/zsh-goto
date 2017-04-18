@@ -1,7 +1,12 @@
 # goto.zsh
 
+function _awk {
+		which awk &>/dev/null && awk $@ || \
+		which gawk &>/dev/null && gawk $@
+}
+
 function _gotofile {
-    echo $GOTO_FILE "$HOME/.labels.tsv" | awk "{print \$1}"
+    echo $GOTO_FILE "$HOME/.labels.tsv" | _awk "{print \$1}"
 }
 
 function _makeLabel {
@@ -35,7 +40,7 @@ function goto {
 }
 
 function _goto {
-    for label in $(awk '{print $1}' `_gotofile`)
+    for label in $(_awk '{print $1}' `_gotofile`)
     do
         compadd "$@" $label
     done
