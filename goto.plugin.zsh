@@ -33,9 +33,9 @@ function goto {
         echo "    jumps to a record set by label"
     elif [[ "$1" == "ls" ]]
     then
-        awk "{ print \$1 }" `_gotofile` | column -t
+        _awk "{ print \$1 }" `_gotofile` | column -t
     else
-        cd $(awk "/^$1\s/ {print \$2;exit;}" `_gotofile`)
+        cd $(_awk "/^$1\s/ {print \$2;exit;}" `_gotofile`)
     fi
 }
 
