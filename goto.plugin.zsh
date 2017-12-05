@@ -1,8 +1,8 @@
 # goto.zsh
 
 function _awk {
-		which awk &>/dev/null && awk $@ || \
-		which gawk &>/dev/null && gawk $@
+    which awk &>/dev/null && awk $@ || \
+    which gawk &>/dev/null && gawk $@
 }
 
 function _gotofile {
@@ -10,7 +10,7 @@ function _gotofile {
 }
 
 function _makeLabel {
-    printf "%s %s\n" $1 $2 >> `_gotofile`
+    printf "%s %s\n" $1 $(echo $2 | tr -d "$HOME") >> `_gotofile`
 }
 
 function label {
@@ -35,7 +35,7 @@ function goto {
     then
         _awk "{ print \$1 }" `_gotofile` | column -t
     else
-        cd $(_awk "/^$1\s/ {print \$2;exit;}" `_gotofile`)
+        cd "$HOME/$(_awk "/^$1\s/ {print \$2;exit;}" `_gotofile` | head -n 1)"
     fi
 }
 
