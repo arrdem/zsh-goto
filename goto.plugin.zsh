@@ -1,4 +1,4 @@
-# goto.zsh
+#compdef _goto
 
 function _awk {
   which awk &>/dev/null && awk $@ || \
