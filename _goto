@@ -1,9 +1,7 @@
-#!/usr/bin/zsh
+#compdef _goto goto
 function _goto {
   for label in $(_awk '{print $1;}' `_goto_file`)
   do
     compadd "$@" "${label}"
   done
 };
-
-complete -o default -F _goto goto
