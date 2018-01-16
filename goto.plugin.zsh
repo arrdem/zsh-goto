@@ -7,16 +7,11 @@ function _awk {
   which gawk &>/dev/null && gawk $@
 };
 
-function _strip_homedir {
-
-};
-
 function _gotofile {
-  echo $GOTO_FILE "$HOME/.labels.tsv" | _awk "{print \$1}"
-};
+ echo "${GOTO_FILE:-${HOME/.labels.tsv}}"
 
 function _make_label {
-  printf "%s %s\n" $1 $(echo $2 | tr -d "$HOME/") >> `_gotofile`
+  printf '%s %s\n' "$1" $(echo "$2" | tr -d "$HOME/") >> `_gotofile`
 };
 
 function label {
@@ -38,13 +33,13 @@ function goto {
     _awk "{ print \$1 }" `_gotofile` | column -t
   else
     dir=$(_awk "/^$1\s/ {print \$2;exit;}" `_gotofile` | head -n 1)
-    if [[ "$dir" != "/*" ]]; then
+    if [[ "${dir}" != "/*" ]]; then
         dir="${HOME}/${dir}"
     fi
-    if [[ ! -e "$dir" ]]; then
+    if [[ ! -e "${dir}" ]]; then
         echo "Error: Label '$1' resolved to missing path '$dir'"
     else
-      cd "$dir"
+      cd "${dir}"
     fi
   fi
 };

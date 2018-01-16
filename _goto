@@ -5,4 +5,4 @@ function _goto {
   done
 };
 
-compdef _goto goto
+complete -o default -F _goto goto
