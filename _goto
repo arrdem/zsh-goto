@@ -1,0 +1,8 @@
+function _goto {
+  for label in $(_awk '{print $1}' `_gotofile`)
+  do
+    compadd "$@" $label
+  done
+};
+
+compdef _goto goto

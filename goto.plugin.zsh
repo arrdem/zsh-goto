@@ -1,4 +1,6 @@
-#compdef _goto
+#!/usr/bin/zsh
+#
+# goto.zsh, a tool for bookmarking directories
 
 function _awk {
   which awk &>/dev/null && awk $@ || \
@@ -46,12 +48,3 @@ function goto {
     fi
   fi
 };
-
-function _goto {
-  for label in $(_awk '{print $1}' `_gotofile`)
-  do
-    compadd "$@" $label
-  done
-};
-
-compdef _goto goto
