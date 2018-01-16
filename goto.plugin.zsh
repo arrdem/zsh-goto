@@ -8,7 +8,8 @@ function _awk {
 };
 
 function _gotofile {
- echo "${GOTO_FILE:-${HOME/.labels.tsv}}"
+  echo "${GOTO_FILE:-${HOME/.labels.tsv}}"
+};
 
 function _make_label {
   printf '%s %s\n' "$1" $(echo "$2" | tr -d "$HOME/") >> `_gotofile`
