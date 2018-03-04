@@ -44,3 +44,12 @@ function goto {
     fi
   fi
 };
+
+function _goto {
+  for label in $(awk '{print $1}' `_goto_file`)
+  do
+    compadd "$@" $label
+  done
+};
+
+compdef _goto goto
