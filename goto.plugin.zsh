@@ -21,7 +21,7 @@ function label {
     echo "    creates a label which goto can cd to"
   elif [[ -d "${2}" ]]; then
     _make_label "${1}" "${2}"
-  elsep
+  else
     _make_label "${1}" "${PWD}"
   fi
 };
