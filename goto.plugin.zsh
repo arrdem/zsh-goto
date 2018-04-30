@@ -12,6 +12,7 @@ function _goto_file {
 };
 
 function _make_label {
+  sed -i '' -e '$a\' `_goto_file` # Fix potentially missing last newline
   printf '%s %s\n' "$1" $(echo "$2" | sed "s^$HOME^^g") >> `_goto_file`
 };
 
