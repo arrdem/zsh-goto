@@ -12,7 +12,7 @@ function _goto_file {
 };
 
 function _make_label {
-  printf '%s %s\n' "$1" $(echo "$2" | tr -d "$HOME/") >> `_goto_file`
+  printf '%s %s\n' "$1" $(echo "$2" | sed "s^$HOME^^g") >> `_goto_file`
 };
 
 function label {
